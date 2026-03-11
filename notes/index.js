@@ -23,9 +23,10 @@ const addNote = () => {
       notes.push(newNote);
       console.log(`Заметка ${newNote.title} сохранена!`);
       console.log(`Всего заметок ${notes.length}`);
+
+      showMenu();
     });
   });
-  showMenu();
 }; 
 
 const showNotes = () => {
