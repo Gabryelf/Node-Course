@@ -1,4 +1,4 @@
-const readline = require("readline");
+const readline = require("readline"); // импортируем модуль из node
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,7 +20,19 @@ const addNote = () => {
         content: content,
         date: new Date().toLocaleString()
       };
+      notes.push(newNote);
+      console.log(`Заметка ${newNote.title} сохранена!`);
+      console.log(`Всего заметок ${notes.length}`);
     });
   });
 }; 
+
+const showMenu = () => {
+  console.log(`${str}`);
+  console.log(`Всего заметок ${notes.length}`);
+  console.log("Введите номер действия от 1 до 4");
+  console.log("1. Доюавить заметку");
+
+  addNotes();
+};
 
