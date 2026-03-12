@@ -4,10 +4,10 @@ class Decorator{
   }
 
   static presentMenu(welcome){
-    drawLine();
+    this.drawLine();
     console.log('\n');
     console.log(`${welcome}`);
-    drawLine();
+    this.drawLine();
   }
 }
 module.exports = Decorator;
