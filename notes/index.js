@@ -1,5 +1,6 @@
 const readline = require("readline"); // импортируем модуль из node
-const helper = require("/utils/helper");
+const helper = require("./utils/helper");
+const Decorator = require("./utils/decorator");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -13,10 +14,7 @@ let notes = [];
 let welcome = `Тебя приветствует приложение ${NAME_PROJ}`;
 
 const welcomeApp = () => {
-  console.log('_'.repeat(30));
-  console.log('\n');
-  console.log(`${welcome}`);
-  console.log('_'.repeat(30));
+  Decorator.presentMenu(welcome);
   showMenu();
 };
 
