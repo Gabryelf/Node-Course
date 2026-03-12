@@ -89,6 +89,7 @@ const deleteNote = () => {
     }
     else if(num > 0 && num <= notes.length){
       notes.splice(num - 1, 1);
+      notes = helper.reindexId(notes);
       console.log(`Заметка удалена!`);
     }
     else{
