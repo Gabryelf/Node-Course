@@ -23,7 +23,7 @@ const addNote = () => {
   rl.question("Введите заголовок", (title) => {
     rl.question("Напишите текст заметки", (content) => {
       const newNote = {
-        id: notes.length + 1,
+        id: notes.length + 1,  // исправить
         title: title,
         content: content,
         date: new Date().toLocaleString()
