@@ -78,6 +78,9 @@ const deleteNote = () => {
   if(notes.length === 0){
     console.log("У вас пока нет заметок!");
   }
+  notes.forEach((note) => {
+    console.log(`\n * [${note.id}] * ${note.title} *`);
+  });
   rl.question("Введите номер заметки для удаления или 0 для отмены", (choice) =>{
     let num = parseInt(choice);
     if(num === 0){
@@ -91,6 +94,7 @@ const deleteNote = () => {
       console.log("Нет подходящей заметки!");
       showMenu();
     }
+     showMenu();
   });
   showMenu();
 };
