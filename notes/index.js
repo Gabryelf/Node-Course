@@ -24,7 +24,7 @@ const addNote = () => {
   rl.question("Введите заголовок", (title) => {
     rl.question("Напишите текст заметки", (content) => {
       const newNote = {
-        id: helper.reindexId(notes),
+        id: notes.length + 1,
         title: title,
         content: content,
         date: new Date().toLocaleString()
