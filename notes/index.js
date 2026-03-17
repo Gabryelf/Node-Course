@@ -1,23 +1,33 @@
-const readline = require("readline"); // импортируем модуль из node
-const helper = require("./utils/helper");
-const Decorator = require("./utils/decorator");
+//=============================
+// Осеовной скрипт приложения
+//=============================
 
+// импорты
+const readline = require("readline"); // импортируем модуль из node
+const helper = require("./utils/helper"); // импортируем свои модули 
+const Decorator = require("./utils/decorator");
+// инициализация ввода вывода
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-
+// переменные
 const NAME_PROJ = '"NOTE"-"BOOK"';
 
 let notes = [];
 
 let welcome = `Тебя приветствует приложение ${NAME_PROJ}`;
 
+//=============================
+// Функции
+//=============================
+
+//приветствие
 const welcomeApp = () => {
   Decorator.presentMenu(welcome);
   showMenu();
 };
-
+//добавление заметки
 const addNote = () => {
   rl.question("Введите заголовок", (title) => {
     rl.question("Напишите текст заметки", (content) => {
@@ -35,7 +45,7 @@ const addNote = () => {
     });
   });
 }; 
-
+//просмотр всех заметок
 const showNotes = () => {
   console.log("----Все ваши заметки----");
   notes.forEach((note) => {
@@ -47,7 +57,7 @@ const showNotes = () => {
   });
   showMenu();
 };
-
+//меню программы
 const showMenu = () => {
   console.log(`Всего заметок ${notes.length}`);
   console.log("Главное меню");
@@ -72,7 +82,7 @@ const showMenu = () => {
     };
   });
 };
-
+//удаление заметки
 const deleteNote = () => {
   if(notes.length === 0){
     console.log("У вас пока нет заметок!");
@@ -98,5 +108,5 @@ const deleteNote = () => {
   });
   showMenu();
 };
-
+//запуск программы
 welcomeApp();
