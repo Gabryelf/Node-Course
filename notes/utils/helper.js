@@ -7,4 +7,4 @@ const statsNotes = (notes) => {
   console.log(`Всего заметок ${notes.length}`);
 };
 
-module.exports = {reindexId};
+module.exports = {reindexId, statsNotes};
