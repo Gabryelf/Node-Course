@@ -13,9 +13,7 @@ const rl = readline.createInterface({
 });
 // переменные
 const NAME_PROJ = '"NOTE"-"BOOK"';
-
 let notes = [];
-
 let welcome = `Тебя приветствует приложение ${NAME_PROJ}`;
 
 //=============================
@@ -24,7 +22,7 @@ let welcome = `Тебя приветствует приложение ${NAME_PRO
 
 //приветствие
 const welcomeApp = () => {
-  Decorator.presentMenu(welcome);
+  Decorator.presentWelcome(welcome);
   showMenu();
 };
 //добавление заметки
@@ -39,7 +37,6 @@ const addNote = () => {
       };
       notes.push(newNote);
       console.log(`Заметка ${newNote.title} сохранена!`);
-      helper.statsNotes(notes);
 
       showMenu();
     });
@@ -47,24 +44,13 @@ const addNote = () => {
 }; 
 //просмотр всех заметок
 const showNotes = () => {
-  console.log("----Все ваши заметки----");
-  notes.forEach((note) => {
-    console.log("-".repeat(30));
-    console.log(`${note.id} * ${note.date}`);
-    console.log(`${note.title}`);
-    console.log(`${note.content}`);
-    console.log("-".repeat(30));
-  });
+  Decorator.showFormatAllNotes(notes);
   showMenu();
 };
 //меню программы
 const showMenu = () => {
   helper.statsNotes(notes);
-  console.log("Главное меню");
-  console.log("1. Добавить заметку");
-  console.log("2. Посмотреть заметки");
-  console.log("3. Удаление заметки");
-  console.log("4. Выход");
+  Decorator.presentMenu();
 
   rl.question("Выберите пункт от 1 до 4  ", (choice) => {
     switch(choice){
