@@ -3,4 +3,4 @@ const reindexId = (notes) => {
   return notes.map((notes, index) => ({...notes, id:index + 1}));
 };
 
-module.export = {reindexId};
+module.exports = {reindexId};
