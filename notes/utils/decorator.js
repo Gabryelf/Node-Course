@@ -46,7 +46,7 @@ class Decorator{
   static showFormatAllNotes(notes){
     console.log("----Все ваши заметки----");
     notes.forEach((note) => {
-      note.showFormatNote(note);
+      this.showFormatNote(note);
   });
   }
 }
