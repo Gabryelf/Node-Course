@@ -29,8 +29,8 @@ const welcomeApp = () => {
 };
 //добавление заметки
 const addNote = () => {
-  rl.question("Введите заголовок", (title) => {
-    rl.question("Напишите текст заметки", (content) => {
+  rl.question("Введите заголовок  ", (title) => {
+    rl.question("Напишите текст заметки  ", (content) => {
       const newNote = {
         id: notes.length + 1,
         title: title,
@@ -39,7 +39,7 @@ const addNote = () => {
       };
       notes.push(newNote);
       console.log(`Заметка ${newNote.title} сохранена!`);
-      console.log(`Всего заметок ${notes.length}`);
+      helper.statsNotes(notes);
 
       showMenu();
     });
@@ -59,13 +59,14 @@ const showNotes = () => {
 };
 //меню программы
 const showMenu = () => {
-  console.log(`Всего заметок ${notes.length}`);
+  helper.statsNotes(notes);
   console.log("Главное меню");
-  console.log("1. Доюавить заметку");
+  console.log("1. Добавить заметку");
   console.log("2. Посмотреть заметки");
   console.log("3. Удаление заметки");
+  console.log("4. Выход");
 
-  rl.question("Выберите пункт от 1 до 2", (choice) => {
+  rl.question("Выберите пункт от 1 до 4  ", (choice) => {
     switch(choice){
       case '1':
         addNote();
@@ -75,6 +76,10 @@ const showMenu = () => {
         break;
       case '3':
         deleteNote();
+        break;
+      case '4':
+        console.log("Завершение работы!")
+        rl.close();
         break;
       default:
         console.log("Нет такого пункта!");
@@ -90,7 +95,7 @@ const deleteNote = () => {
   notes.forEach((note) => {
     console.log(`\n * [${note.id}] * ${note.title} *`);
   });
-  rl.question("Введите номер заметки для удаления или 0 для отмены", (choice) =>{
+  rl.question("Введите номер заметки для удаления или 0 для отмены  ", (choice) =>{
     let num = parseInt(choice);
     if(num === 0){
       showMenu();
