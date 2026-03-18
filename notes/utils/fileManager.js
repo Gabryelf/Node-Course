@@ -7,8 +7,16 @@ const saveFile = (notes) => {
 };
 
 const loadFile = () => {
-  const jsonData = fs.readFileSync(path, 'utf-8');
-  return JSON.parse(jsonData);
+  try{
+    const jsonData = fs.readFileSync(path, 'utf-8');
+    return JSON.parse(jsonData);
+  }
+  catch(error){
+    console.log(`${error.massage}`);
+    console.log('Возникла ошибка', error.massage);
+    return [];
+  }
+  
 }
 
 module.exports = { saveFile, loadFile };
