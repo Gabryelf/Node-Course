@@ -38,13 +38,15 @@ const server = http.createServer(async (req, res) => {
     let body = '';
     res.on('data', chunk => body += chunk);
     res.on('end', async() => {
+      console.log("create start");
+      const {title, content} = parseJson(body);
       const newNote = {
            id: notes.length + 1,
            title: title,
            content: content,
            date: new Date().toLocaleString(),
         };
-      
+        console.log("create end");
         notes.push(newNote);
         fileManager.saveFile(notes);
         console.log(`Заметка ${newNote.title} сохранена!`);
