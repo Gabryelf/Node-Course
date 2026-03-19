@@ -14,3 +14,7 @@ async function loadNotes(){
     stats.innerText = `Информации о заметках нет`
   }
 }
+
+loadNotes();
+
+
