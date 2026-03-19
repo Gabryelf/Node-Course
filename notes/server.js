@@ -16,12 +16,14 @@ const server = http.createServer(async (req, res) => {
     const html = await fs.readFile(path.join(__dirname, 'index.html'), 'utf-8');
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(html);
+    return;
   }
 
   if(url === '/app.js' && method === 'GET'){
     const js = await fs.readFile(path.join(__dirname, 'app.js'), 'utf-8');
     res.writeHead(200, {'Content-Type': 'application/javascript'});
     res.end(js);
+    return;
   }
 
   // API ROUTERS
@@ -29,6 +31,28 @@ const server = http.createServer(async (req, res) => {
   if(url === 'api/notes' && method === 'GET'){
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(JSON.stringify(notes)); 
+    return;
+  }
+
+  if(url === 'api/notes' && method === 'POST'){
+    let body = '';
+    res.on('data', chunk => body += chunk);
+    res.on('end', async() => {
+      const newNote = {
+           id: notes.length + 1,
+           title: title,
+           content: content,
+           date: new Date().toLocaleString(),
+        };
+      
+        notes.push(newNote);
+        fileManager.saveFile(notes);
+        console.log(`Заметка ${newNote.title} сохранена!`);
+
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify({success : true})); 
+    });
+    return;
   }
 
   
