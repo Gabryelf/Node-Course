@@ -1,5 +1,5 @@
-const stats = document.getElemettById('stats');
-const content = document.getElemettById('content');
+const stats = document.getElementById('stats');
+const content = document.getElementById('content');
 
 let notes = []
 
