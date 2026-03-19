@@ -15,6 +15,23 @@ async function loadNotes(){
   }
 }
 
+async function addNote(){
+  const title = prompt("Введите название ");
+  const content = prompt("Введите содержание ");
+
+  try{
+    await fetch('api/notes', {
+      method: "POST",
+      headers: {'Content-Type' : 'application/json' },
+      body: JSON.stringify({title, content})
+    });
+  }
+  catch(error)
+  {
+    console.log("ERROR", error.message)
+  }
+}
+
 loadNotes();
 
 
