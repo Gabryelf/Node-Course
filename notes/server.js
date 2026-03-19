@@ -28,13 +28,13 @@ const server = http.createServer(async (req, res) => {
 
   // API ROUTERS
 
-  if(url === 'api/notes' && method === 'GET'){
+  if(url === '/api/notes' && method === 'GET'){
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(JSON.stringify(notes)); 
     return;
   }
 
-  if(url === 'api/notes' && method === 'POST'){
+  if(url === '/api/notes' && method === 'POST'){
     let body = '';
     res.on('data', chunk => body += chunk);
     res.on('end', async() => {
