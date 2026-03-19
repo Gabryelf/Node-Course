@@ -9,6 +9,29 @@ let notes = fileManager.loadFile();
 
 const server = http.createServer(async (req, res) => {
   const { url, method } = req;
+
+  // ROOT ROUTERS
+
+  if(url === '/' && method === 'GET'){
+    const html = await fs.readFile(path.join(__dirname, 'index.html'), 'utf-8');
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end(html);
+  }
+
+  if(url === '/app.js' && method === 'GET'){
+    const js = await fs.readFile(path.join(__dirname, 'app.js'), 'utf-8');
+    res.writeHead(200, {'Content-Type': 'application/javascript'});
+    res.end(js);
+  }
+
+  // API ROUTERS
+
+  if(url === 'api/notes' && method === 'GET'){
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify(notes)); 
+  }
+
+  
 });
 
 server.listen(3000, () => {
