@@ -2,11 +2,13 @@
     "name": "book-note",
     "version": "0.0.6",
     "description": "Консольное приложение для заметок",
-    "main": "index.mjs",
+    "main": "index.js",
     "type": "module",
     "scripts": {
-      "start": "node index.mjs",
-      "dev": "node --watch index.mjs"
+        "start": "node index.js",
+        "dev": "node --watch index.js",
+        "build": "echo 'Сборка не требуется'",
+        "test": "echo 'Тесты не настроены'"
     },
     "keywords": ["notes", "console", "app"],
     "author": "",
