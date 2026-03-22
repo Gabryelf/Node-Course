@@ -20,5 +20,7 @@ jobs:
       run: node --version
     - name: Проверка структуры файлов
       run: ls -la
-    - name: Проверка синтаксиса
-      run: node -c index.js
+    - name: Переход в папку notes
+      run: cd notes && ls -la
+    - name: Проверка синтаксиса index.js
+      run: node -c notes/index.js
