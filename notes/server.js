@@ -54,6 +54,10 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ success: true }));
     });
+
+    if(url === startsWith("/api/notes") && method === 'DELETE'){
+      
+    }
     return;
   }
 });
