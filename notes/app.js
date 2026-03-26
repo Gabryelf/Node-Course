@@ -108,7 +108,7 @@ async function editNote() {
     return;
   }
   try {
-    await fetch(`api/notes/${input_id}`, {
+    await fetch(`api/notes/${id_input}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, content }),
