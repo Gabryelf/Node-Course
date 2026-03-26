@@ -7,10 +7,9 @@ async function loadNotes() {
   try {
     const res = await fetch("api/notes");
     notes = await res.json();
-    if(notes.length === 0){
+    if (notes.length === 0) {
       stats.innerText = "У вас нет заметок. Создайте свою первую заметку! \n\n";
-    }
-    else{
+    } else {
       stats.innerText = `Заметок ${notes.length}`;
     }
   } catch (error) {
@@ -22,7 +21,7 @@ async function loadNotes() {
 async function addNote() {
   const title = prompt("Введите название ");
   const content = prompt("Введите содержание ");
-  if(title === null | content === null){
+  if ((title === null) | (content === null)) {
     alert("Заметка не может содержать пустое название или содержание!");
     return;
   }
@@ -38,76 +37,72 @@ async function addNote() {
   }
 }
 
-async function showNotes(){
-    await loadNotes();
-    if(notes.length === 0){
-       notes_conteiner.innerHTML = '<h2> Пока у вас нет заметок! </h2>';
-    }
-    let html = '<h2> --- Заметки --- </h2>';
-    notes.forEach((note) => {
-        html += `
-          <div style=" background-color: #030202; color: #008f4a; ">
+async function showNotes() {
+  await loadNotes();
+  if (notes.length === 0) {
+    notes_conteiner.innerHTML = "<h2> Пока у вас нет заметок! </h2>";
+  }
+  let html = "<h2> --- Заметки --- </h2>";
+  notes.forEach((note) => {
+    html += `
+          <div style=" background-color: #030202; color: #008f4a;" class="note_conteiner">
               <small> [ ${note.id} ] ${note.date} </small>
               <strong> ${note.title} </strong>
-              <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ </p>
               <strong> ${note.content} </strong>
           </div>
         `;
-    });
-    notes_conteiner.innerHTML = html;
-    
+  });
+  notes_conteiner.innerHTML = html;
 }
 
-async function deleteNote(){
+async function deleteNote() {
   await loadNotes();
-  if(notes.length === 0){
-       alert("Пока нечего удалить! Заметок нет!");
-       return;
+  if (notes.length === 0) {
+    alert("Пока нечего удалить! Заметок нет!");
+    return;
   }
-  let list = notes.map(note => ` [${note.id}] ${note.title} `).join('\n');
+  let list = notes.map((note) => ` [${note.id}] ${note.title} `).join("\n");
   const input = prompt(`Введите номер заметки для удаления: \n\n${list}`);
 
   const id_input = parseInt(input);
-  if(!id_input){
+  if (!id_input) {
     return;
   }
 
-  if(id_input > 0 && id_input <= notes.length){
-    const res = await fetch(`/api/notes/${id_input}`, { method:'DELETE' });
-    if(res.ok){
+  if (id_input > 0 && id_input <= notes.length) {
+    const res = await fetch(`/api/notes/${id_input}`, { method: "DELETE" });
+    if (res.ok) {
       await showNotes();
     }
-  }
-  else{
+  } else {
     alert("Отмена удаления! \n Необходимо указать номер существующей заметки!");
   }
-  
 }
 
 async function editNote() {
   await loadNotes();
-  if(notes.length === 0){
-       alert("Пока нечего редактировать! Создайте заметку!");
-       return;
+  if (notes.length === 0) {
+    alert("Пока нечего редактировать! Создайте заметку!");
+    return;
   }
-  let list = notes.map(note => ` [${note.id}] ${note.title} `).join('\n');
+  let list = notes.map((note) => ` [${note.id}] ${note.title} `).join("\n");
   const input = prompt(`Введите номер заметки для изменения: \n\n${list}`);
 
   const id_input = parseInt(input);
-  if(!id_input){
+  if (!id_input) {
     return;
   }
 
-  if(id_input < 1 && id_input > notes.length){
+  if (id_input < 1 && id_input > notes.length) {
     alert("Такой заметки не существует!");
     return;
   }
 
-  const note = notes.find(note => note.id === id_input);
-  
+  const note = notes.find((note) => note.id === id_input);
+
   const title = prompt(`Введите название `, `${note.title}`);
   const content = prompt("Введите содержание ", `${note.content}`);
-  if(title === null | content === null){
+  if ((title === null) | (content === null)) {
     alert("Заметка не может содержать пустое название или содержание!");
     return;
   }
@@ -127,3 +122,4 @@ loadNotes();
 
 window.addNote = addNote;
 window.deleteNote = deleteNote;
+window.editNote = editNote;
