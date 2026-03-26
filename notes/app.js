@@ -69,13 +69,11 @@ async function deleteNote(){
 
   const id_input = parseInt(input);
   if(!id_input){
-    console.log("ERROR");
     return;
   }
 
   if(id_input > 0 && id_input <= notes.length){
     const res = await fetch(`/api/notes/${id_input}`, { method:'DELETE' });
-    console.log("RES");
     if(res.ok){
       await showNotes();
     }
