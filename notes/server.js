@@ -58,7 +58,6 @@ const server = http.createServer(async (req, res) => {
   }
   if(url.startsWith("/api/notes/") && method === 'DELETE'){
       const id = parseInt(url.split('/')[3]);
-      console.log(id);
       notes.splice(id - 1, 1);
       notes = helper.reindexId(notes);
       fileManager.saveFile(notes);
