@@ -67,27 +67,27 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (url.startsWith("/api/notes/") && method === "PUT") {
-    const id = parseInt(url.split("/")[3]);
-
     let body = "";
+    const id = parseInt(url.split("/")[3]);
     req.on("data", (chunk) => (body += chunk));
     req.on("end", async () => {
-      const { title, content } = JSON.parse(body);
-      let note_index = notes.findIndex((note) => note.id === id);
+      console.log("edit start");
 
-      notes[note_idex] = {
-        ...notes[note_idex],
-        title,
-        content,
+      const { title, content } = JSON.parse(body);
+
+      notes[id - 1] = {
+        ...notes[id - 1],
+        title: title,
+        content: content,
         date: new Date().toLocaleString(),
       };
       fileManager.saveFile(notes);
-      console.log(`Заметка ${newNote.title} сохранена!`);
+      console.log("edit end");
+      console.log(`Заметка ${title} изменена!`);
 
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ success: true }));
     });
-    return;
   }
   return;
 });
