@@ -103,7 +103,7 @@ async function editNote() {
     return;
   }
 
-  const note = notes.find(note => note.id === (id_input - 1));
+  const note = notes.find(note => note.id === id_input);
   
   const title = prompt(`Введите название `, `${note.title}`);
   const content = prompt("Введите содержание ", `${note.content}`);
