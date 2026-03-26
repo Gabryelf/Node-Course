@@ -59,18 +59,21 @@ async function showNotes(){
 }
 
 async function deleteNote(){
-  loadNotes();
+  await loadNotes();
   if(notes.length === 0){
        alert("Пока нечего удалить! Заметок нет!");
   }
-  let list = notes.map(note => ` [${note.id}] ${note.title} `.join('\n'));
+  let list = notes.map(note => ` [${note.id}] ${note.title} `).join('\n');
   const input = prompt(`Введите номер заметки для удаления: \n\n${list}`);
 
   const id_input = parseInt(input);
   if(!id_input){return;}
 
   if(id_input > 0 && id_input <= notes.length){
-    const res = await fetch(`api/notes/${id_input}`, 'DELETE');
+    const res = await fetch(`/api/notes/${id_input}`, { method:'DELETE' });
+    if(res.ok){
+      await showNotes();
+    }
   }
   else{
     alert("Отмена удаления! \n Необходимо указать номер существующей заметки!");
