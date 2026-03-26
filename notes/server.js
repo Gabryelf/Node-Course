@@ -56,15 +56,39 @@ const server = http.createServer(async (req, res) => {
     });
     return;
   }
-  if(url.startsWith("/api/notes/") && method === 'DELETE'){
-      const id = parseInt(url.split('/')[3]);
-      notes.splice(id - 1, 1);
-      notes = helper.reindexId(notes);
+  if (url.startsWith("/api/notes/") && method === "DELETE") {
+    const id = parseInt(url.split("/")[3]);
+    notes.splice(id - 1, 1);
+    notes = helper.reindexId(notes);
+    fileManager.saveFile(notes);
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ success: true }));
+  }
+
+  if (url.startsWith("/api/notes/") && method === "PUT") {
+    const id = parseInt(url.split("/")[3]);
+
+    let body = "";
+    req.on("data", (chunk) => (body += chunk));
+    req.on("end", async () => {
+      const { title, content } = JSON.parse(body);
+      let note_index = notes.findIndex((note) => note.id === id);
+
+      notes[note_idex] = {
+        ...notes[note_idex],
+        title,
+        content,
+        date: new Date().toLocaleString(),
+      };
       fileManager.saveFile(notes);
+      console.log(`Заметка ${newNote.title} сохранена!`);
 
       res.writeHead(200, { "Content-Type": "application/json" });
-      return res.end(JSON.stringify({ success: true }));
-    }
+      res.end(JSON.stringify({ success: true }));
+    });
+    return;
+  }
   return;
 });
 
