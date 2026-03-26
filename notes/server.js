@@ -53,10 +53,15 @@ const server = http.createServer(async (req, res) => {
 
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ success: true }));
+      return;
     });
-
-    if(url === startsWith("/api/notes") && method === 'DELETE'){
-      
+    // http://localhost:3000/api/notes/id(1) <= предположительное число
+    if(url.startsWith("/api/notes") && method === 'DELETE'){
+      const id = parseInt(url.split('/')[3]);
+      notes.splice(id - 1, 1);
+      notes = helper.reindexId(notes);
+      fileManager.saveFile(notes);
+      return;
     }
     return;
   }
