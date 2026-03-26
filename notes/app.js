@@ -21,7 +21,7 @@ async function loadNotes() {
 async function addNote() {
   const title = prompt("Введите название ");
   const content = prompt("Введите содержание ");
-  if ((title === null) | (content === null)) {
+  if (((title === null) | (content === null)) | ((!title) | (!content))) {
     alert("Заметка не может содержать пустое название или содержание!");
     return;
   }
@@ -98,10 +98,11 @@ async function editNote() {
     return;
   }
 
-  const note = notes.find((note) => note.id === id_input);
+  const note = notes.find(note => note.id === id_input);
 
-  const title = prompt(`Введите название `, `${note.title}`);
-  const content = prompt("Введите содержание ", `${note.content}`);
+  const title = prompt(`Введите новое название `, `${note.title}`);
+  const content = prompt("Введите новое содержание ", `${note.content}`);
+  
   if ((title === null) | (content === null)) {
     alert("Заметка не может содержать пустое название или содержание!");
     return;
@@ -120,6 +121,7 @@ async function editNote() {
 
 loadNotes();
 
+window.showNote = showNote;
 window.addNote = addNote;
 window.deleteNote = deleteNote;
 window.editNote = editNote;
