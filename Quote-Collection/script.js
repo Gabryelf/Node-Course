@@ -24,6 +24,7 @@ function addQuote(){
   // save data
   quotes.push({textInput, authorInput});
   saveQuotes(quotes);
+  renderQuotes();
 }
 
 // show quotes
@@ -31,19 +32,24 @@ function renderQuotes(){
   // get elements
   let list = document.getElementById("quotesList");
   let html = "";
+  // render cards
   quotes.forEach((quote, index) => {
     html += `
-      <div class=""> ${quote.textInput}</div>
-      <div class=""> ${quote.authorInput}</div>
+    <div class="quote-card">
+      <div class="quote-text"> ${quote.textInput}</div>
+      <div class="quote-author"> ${quote.authorInput}</div>
       <button class="delete-btn" data-index="${index}"> Удалить </button>
+    </div>
       `;
   });
   list.innerHTML = html;
-
-  // render cards
-  document.querySelectorAll("delete-btn").forEach(btn => { btn.addEventListener('click', (e) => {})});
-
   // add event delete
+  document.querySelectorAll("delete-btn").forEach(btn => { btn.addEventListener('click', (e) => {
+    const index = parseInt(e.target.dataset.index);
+    quotes.splice(index, 1);
+    saveQuotes();
+    renderQuotes();
+  })});
 }
 
 // events
@@ -51,3 +57,4 @@ document.getElementById('addBtn').addEventListener('click', addQuote);
 
 // start app
 loadQuotes();
+renderQuotes();
