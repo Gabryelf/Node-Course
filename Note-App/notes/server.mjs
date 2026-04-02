@@ -1,9 +1,13 @@
-const http = require("http");
-const fs = require("fs").promises;
-const path = require("path");
+import * as http from 'http';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const helper = require("./utils/helper");
-const fileManager = require("./utils/fileManager");
+import { reindexId, statsNotes } from './utils/helper.mjs'
+import * as fileManager from './utils/fileManager';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let notes = fileManager.loadFile();
 
@@ -59,7 +63,7 @@ const server = http.createServer(async (req, res) => {
   if (url.startsWith("/api/notes/") && method === "DELETE") {
     const id = parseInt(url.split("/")[3]);
     notes.splice(id - 1, 1);
-    notes = helper.reindexId(notes);
+    notes = reindexId(notes);
     fileManager.saveFile(notes);
 
     res.writeHead(200, { "Content-Type": "application/json" });
