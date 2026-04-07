@@ -1,1 +1,12 @@
-
+{
+  "name": "Images Loder",
+  "description": " ",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "icons": {},
+  "action": { 
+    "default_popup" : "popup/popup.html"
+  },
+  "permissions": [],
+  "backgroud": {}
+}
