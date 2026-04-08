@@ -4,7 +4,7 @@ const loadBtn = document.getElementById("load-btn")
       const tab = tabs[0];
       if(tab){
         chrome.scripting.executeScript({
-          target: {tabID: tab.id}, 
+          target: {tabId: tab.id, allFrames: true}, 
           func: selectImages
         },
         onResult
@@ -14,10 +14,14 @@ const loadBtn = document.getElementById("load-btn")
   });
 
 function selectImages(){
-  const imagesUrl = document.querySelectorAll("img");
-  return Array.;
+  const images = document.querySelectorAll("img");
+  return Array.from(images).map(image => image.src);
 }
 
-function onResult(){
+function onResult(frames){
+  const imagesUrl = frames.map(frame => frame.result)
+    .reduce((r1, r2) => r1.concat(r2));
+
+  window.navigator.clipboard.writeText(imagesUrl.join("\n")).then(window.close());
   
 }
