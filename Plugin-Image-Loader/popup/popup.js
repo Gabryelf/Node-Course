@@ -25,3 +25,7 @@ function onResult(frames){
   window.navigator.clipboard.writeText(imagesUrl.join("\n")).then(window.close());
   
 }
+
+function toPageImages(){
+  chrome.create({"url" : "pages/page.html"});
+}
