@@ -22,6 +22,7 @@ function onResult(frames){
   const imagesUrls = frames.map(frame => frame.result)
     .reduce((r1, r2) => r1.concat(r2));
 
+<<<<<<< Updated upstream
   window.navigator.clipboard.writeText(imagesUrls.join("\n")).then(window.close());
   toPageImages(imagesUrls);
 }
@@ -33,5 +34,20 @@ function toPageImages(urls) {
         chrome.tabs.update(tab.id, { active: true });
       });
     }, 500);
+=======
+  //window.navigator.clipboard.writeText(imagesUrl.join("\n")).then(window.close());
+
+  toPageImages(imagesUrl);
+  
+}
+
+function toPageImages(urls){
+  chrome.tabs.create({"url" : "pages/page.html", active: false}, (tab) => {
+    setTimeout(() => {
+      chrome.tabs.sendMessage(tab.id, urls, (resp) => {
+        chrome.tabs.update(tab.id, {active: true});
+      })
+    },500)
+>>>>>>> Stashed changes
   });
 }
