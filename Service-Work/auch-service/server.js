@@ -1,21 +1,25 @@
-import express from "express";
+import express from 'express';
+import 'dotenv/config'
+import {initDatabase} from "./database/database.js";
+import apiRoutes from "./routes/api.js";
+import pageRoutes from "./routes/pages.js";
+import {fileURLToPath} from "url";
+import path from "path";
 
-import pageRouter from "./routers/pages.js";
-import apiRouter from "./routers/api.js";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3000;
+const port = process.env.AUTH_PORT || 3000;
 
-//midlleware - промежуточные слои
+await initDatabase();
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static("public"));
 
-//routers - обработчики запросов
-app.use("/", pageRouter);
-app.use("/api", apiRouter);
+app.use("/", pageRoutes);
+app.use("/api", apiRoutes);
 
-// запуск
 app.listen(port, () => {
-    console.log(`http://localhost:${port}`);
+    console.log(`Server started http://localhost:${port}`);
 });
