@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление профилем</title>
+</head>
+<body>
+    <h1>Профиль пользователя</h1>
+    <div id="profileContainer"></div>
+    <button onclick="logout()">Выйти</button>
+
+    <script>
+        // Получаем JWT токен из sessionStorage (устанавливается auth-сервисом при логине)
+        const token = sessionStorage.getItem('token');
+        // Если токена нет, пользователь не авторизован – перебрасываем на страницу входа (auth-сервис на порту 3000)
+        if (!token) window.location.href = 'http://localhost:3000';
+
+        /**
+         * Загружает профиль с сервера (GET /api/profile)
+         * Если профиль не найден (404), предлагает создать его.
+         */
+        async function loadProfile() {
+            // Выполняем запрос к API profile-сервиса (порт 3001)
+            const res = await fetch('/api/profile', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            // Если статус 404 – профиля ещё нет
+            if (res.status === 404) {
+                document.getElementById('profileContainer').innerHTML = '<p>Профиль не найден. Создайте его.</p>';
+                showEditForm(); // показать форму создания
+                return;
+            }
+
+            // Если запрос успешен (200), парсим JSON
+            const data = await res.json();
+            displayProfile(data.profile); // отображаем профиль
+        }
+
+        /**
+         * Отображает данные профиля в виде текста и кнопки редактирования
+         */
+        function displayProfile(profile) {
+            document.getElementById('profileContainer').innerHTML = `
+                <p><strong>Полное имя:</strong> ${profile.full_name || '—'}</p>
+                <p><strong>О себе:</strong> ${profile.bio || '—'}</p>
+                <p><strong>Дата рождения:</strong> ${profile.birth_date || '—'}</p>
+                <button onclick="showEditForm()">Редактировать</button>
+            `;
+        }
+
+        /**
+         * Показывает форму для ввода/редактирования профиля
+         */
+        function showEditForm() {
+            document.getElementById('profileContainer').innerHTML = `
+                <input type="text" id="full_name" placeholder="Полное имя">
+                <textarea id="bio" placeholder="О себе"></textarea>
+                <input type="date" id="birth_date">
+                <button onclick="saveProfile()">Сохранить</button>
+            `;
+        }
+
+        /**
+         * Отправляет данные профиля на сервер (POST /api/profile)
+         * После сохранения перезагружает отображение.
+         */
+        async function saveProfile() {
+            // Получаем значения из полей формы
+            const full_name = document.getElementById('full_name').value;
+            const bio = document.getElementById('bio').value;
+            const birth_date = document.getElementById('birth_date').value;
+
+            // Выполняем POST-запрос с телом JSON и заголовком авторизации
+            const res = await fetch('/api/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ full_name, bio, birth_date })
+            });
+
+            if (res.ok) {
+                alert('Сохранено');
+                loadProfile(); // обновляем отображение
+            } else {
+                alert('Ошибка сохранения');
+            }
+        }
+
+        /**
+         * Выход из системы: удаляем токен из sessionStorage и перенаправляем на страницу входа.
+         */
+        function logout() {
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('user'); // удаляем и данные пользователя, если есть
+            window.location.href = 'http://localhost:3000';
+        }
+
+        // При загрузке страницы сразу загружаем профиль
+        loadProfile();
+    </script>
+</body>
+</html>

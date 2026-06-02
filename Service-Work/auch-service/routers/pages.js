@@ -10,4 +10,8 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
+router.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "dashboard.html"));
+});
+
 export default router;
