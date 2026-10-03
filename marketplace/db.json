@@ -1,0 +1,151 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Война и мир",
+      "author": "Лев Толстой",
+      "price": 800,
+      "stock": 10,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "2",
+      "title": "Преступление и наказание",
+      "author": "Фёдор Достоевский",
+      "price": 650,
+      "stock": 5,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "3",
+      "title": "Мастер и Маргарита",
+      "author": "Михаил Булгаков",
+      "price": 700,
+      "stock": 0,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "4",
+      "title": "Анна Каренина",
+      "author": "Лев Толстой",
+      "price": 750,
+      "stock": 8,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "5",
+      "title": "Отцы и дети",
+      "author": "Иван Тургенев",
+      "price": 550,
+      "stock": 12,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "6",
+      "title": "Мёртвые души",
+      "author": "Николай Гоголь",
+      "price": 600,
+      "stock": 7,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "7",
+      "title": "Герой нашего времени",
+      "author": "Михаил Лермонтов",
+      "price": 500,
+      "stock": 9,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "8",
+      "title": "Обломов",
+      "author": "Иван Гончаров",
+      "price": 620,
+      "stock": 6,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "9",
+      "title": "Братья Карамазовы",
+      "author": "Фёдор Достоевский",
+      "price": 850,
+      "stock": 4,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "10",
+      "title": "Тихий Дон",
+      "author": "Михаил Шолохов",
+      "price": 900,
+      "stock": 3,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "11",
+      "title": "Доктор Живаго",
+      "author": "Борис Пастернак",
+      "price": 780,
+      "stock": 5,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "12",
+      "title": "Один день Ивана Денисовича",
+      "author": "Александр Солженицын",
+      "price": 450,
+      "stock": 15,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "13",
+      "title": "Мы",
+      "author": "Евгений Замятин",
+      "price": 520,
+      "stock": 8,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "14",
+      "title": "Петербург",
+      "author": "Андрей Белый",
+      "price": 710,
+      "stock": 2,
+      "coverImage": "https://via.placeholder.com/150x200"
+    },
+    {
+      "id": "15",
+      "title": "Хождение по мукам",
+      "author": "Алексей Толстой",
+      "price": 680,
+      "stock": 11,
+      "coverImage": "https://via.placeholder.com/150x200"
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": "1",
+          "title": "Война и мир",
+          "author": "Лев Толстой",
+          "price": 800,
+          "stock": 10,
+          "coverImage": "https://via.placeholder.com/150x200",
+          "quantity": 3
+        },
+        {
+          "id": "2",
+          "title": "Преступление и наказание",
+          "author": "Фёдор Достоевский",
+          "price": 650,
+          "stock": 5,
+          "coverImage": "https://via.placeholder.com/150x200",
+          "quantity": 1
+        }
+      ],
+      "total": 3050,
+      "createdAt": 1787773972632,
+      "id": 1
+    }
+  ]
+}

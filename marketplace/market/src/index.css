@@ -1,0 +1,409 @@
+/* ===== ПЕРЕМЕННЫЕ ТЕМ ===== */
+:root {
+  --bg-color: #f5e6d3;
+  --header-bg: #8b5a2b;
+  --header-text: #f5e6d3;
+  --text-color: #5c3a1e;
+  --card-border: #8b5a2b;
+  --card-bg: transparent;
+  --btn-active-bg: #8b5a2b;
+  --btn-active-text: #f5e6d3;
+  --btn-disabled-bg: #d4b896;
+  --btn-disabled-text: #a08060;
+  --input-bg: #f5e6d3;
+  --input-border: #8b5a2b;
+  --nav-link: #f5e6d3;
+  --nav-link-hover: #d4b896;
+  --badge-bg: #d4a574;
+  --badge-text: #2a1a0e;
+  --price-color: #5c3a1e;
+  --stock-zero: #a08060;
+}
+
+[data-theme='dark'] {
+  --bg-color: #3d2817;
+  --header-bg: #2a1a0e;
+  --header-text: #d4a574;
+  --text-color: #d4a574;
+  --card-border: #5c3a1e;
+  --card-bg: transparent;
+  --btn-active-bg: #5c3a1e;
+  --btn-active-text: #d4a574;
+  --btn-disabled-bg: #2a1a0e;
+  --btn-disabled-text: #5c3a1e;
+  --input-bg: #3d2817;
+  --input-border: #5c3a1e;
+  --nav-link: #d4a574;
+  --nav-link-hover: #f5e6d3;
+  --badge-bg: #d4a574;
+  --badge-text: #2a1a0e;
+  --price-color: #d4a574;
+  --stock-zero: #8b6a4a;
+}
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Caveat', cursive;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  font-family: 'Caveat', cursive;
+  
+  /* === Фиксация хедера === */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--header-text);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--nav-link);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--nav-link-hover);
+}
+
+.cart-badge {
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border-radius: 50%;
+  padding: 0.1rem 0.5rem;
+  font-size: 1rem;
+  position: absolute;
+  top: -0.5rem;
+  right: -1rem;
+  font-weight: 700;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--nav-link);
+  color: var(--nav-link);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--nav-link);
+  color: var(--header-bg);
+}
+
+/* ===== MAIN ===== */
+.main-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== ФИЛЬТРЫ ===== */
+.filters {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.filters input {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  width: 250px;
+  outline: none;
+}
+
+.filters input::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.filters select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ===== СЕТКА КАРТОЧЕК ===== */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* ===== КАРТОЧКА КНИГИ ===== */
+.book-card {
+  border: 3px solid var(--card-border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background-color: var(--card-bg);
+  transition: transform 0.2s;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 3px solid var(--card-border);
+  object-fit: cover;
+  background-color: var(--input-bg);
+  margin-bottom: 0.5rem;
+}
+
+.book-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.book-author {
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.book-stock {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.book-stock.in-stock {
+  color: var(--text-color);
+  
+}
+
+.book-stock.out-of-stock {
+  color: var(--stock-zero);
+  font-weight: 600;
+}
+
+.book-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0.3rem 0;
+  color: var(--price-color);
+}
+
+.book-card button.add-btn {
+  margin-top: auto;
+  padding: 0.6rem;
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.book-card button.add-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.book-card button.add-btn:disabled {
+  background-color: var(--btn-disabled-bg);
+  color: var(--btn-disabled-text);
+  cursor: not-allowed;
+  border-color: var(--btn-disabled-bg);
+}
+
+/* ===== КОРЗИНА ===== */
+.cart h2, .orders h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid var(--card-border);
+  margin-bottom: 0.8rem;
+  border-radius: 4px;
+  font-size: 1.4rem;
+}
+
+.item-title {
+  font-weight: 600;
+  flex: 1;
+}
+
+.item-price {
+  margin: 0 1rem;
+  font-weight: 600;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 1rem;
+}
+
+.quantity-controls button {
+  padding: 0.2rem 0.8rem;
+  cursor: pointer;
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+}
+
+.quantity-controls span {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.remove-btn {
+  background: none;
+  border: 2px solid var(--card-border);
+  color: var(--text-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+
+.remove-btn:hover {
+  background-color: var(--card-border);
+  color: var(--bg-color);
+}
+
+.cart-total {
+  margin-top: 2rem;
+  text-align: right;
+  padding-top: 1rem;
+  border-top: 2px solid var(--card-border);
+}
+
+.cart-total h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.checkout-btn {
+  padding: 0.7rem 2rem;
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.checkout-btn:hover {
+  opacity: 0.85;
+}
+
+.cart-empty, .loading {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 3rem;
+  color: var(--text-color);
+}
+
+/* ===== ЗАКАЗЫ ===== */
+.order-card {
+  border: 3px solid var(--card-border);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+.order-card p {
+  font-size: 1.4rem;
+  margin: 0.3rem 0;
+}
+
+.order-card ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.order-card li {
+  font-size: 1.3rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  border: 2px solid var(--card-border);
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  opacity: 0.85;
+}
